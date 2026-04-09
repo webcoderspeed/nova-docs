@@ -1,26 +1,53 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Scan Nova UI submodule for Tailwind classes */
+@source "../../nova-ui/src/**/*.{ts,tsx}";
 
+/* Import Nova UI design tokens & base styles */
+@import '../../nova-ui/src/css/tokens.css';
+@import '../../nova-ui/src/css/typography.css';
+@import '../../nova-ui/src/css/animations.css';
+@import '../../nova-ui/src/css/reset.css';
+
+/* Docs-specific theme extensions */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-docs-sidebar: var(--nova-bg-secondary);
+  --color-docs-border: var(--nova-border-default);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Premium docs site styles */
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--nova-border-default);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--nova-border-strong);
+}
+
+/* Code blocks */
+code {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--nova-color-primary);
+  color: white;
 }
