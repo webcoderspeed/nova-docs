@@ -1,0 +1,3 @@
+[submodule "nova-ui"]
+	path = nova-ui
+	url = git@webcoderspeed:webcoderspeed/nova-ui.git
