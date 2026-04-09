@@ -27,6 +27,7 @@ const navigation = [
       { label: 'Input', href: '/docs/components/input' },
       { label: 'Modal', href: '/docs/components/modal' },
       { label: 'Radio', href: '/docs/components/radio' },
+      { label: 'Select', href: '/docs/components/select' },
       { label: 'Spinner', href: '/docs/components/spinner' },
       { label: 'Switch', href: '/docs/components/switch' },
       { label: 'Table', href: '/docs/components/table' },

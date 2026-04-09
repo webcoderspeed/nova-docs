@@ -33,5 +33,5 @@
     "**/*.mts",
     "nova-ui/src"
   ],
-  "exclude": ["node_modules", "nova-ui/*.ts", "nova-ui/*.js", "nova-ui/*.mts", "nova-ui/src/test-setup.ts", "nova-ui/src/**/*.test.tsx", "nova-ui/src/**/*.test.ts", "nova-ui/src/**/*.testIds.ts", "nova-ui/src/test-utils", "nova-ui/src/vitest-axe.d.ts", "nova-ui/src/playground"]
+  "exclude": ["node_modules", "nova-ui/*.ts", "nova-ui/*.js", "nova-ui/*.mts", "nova-ui/src/test-setup.ts", "nova-ui/src/**/*.test.tsx", "nova-ui/src/**/*.test.ts", "nova-ui/src/**/*.testIds.ts", "nova-ui/src/test-utils", "nova-ui/src/vitest-axe.d.ts", "nova-ui/src/playground", "nova-ui/examples", "nova-ui/e2e"]
 }
