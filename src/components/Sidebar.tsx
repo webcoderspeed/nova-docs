@@ -42,11 +42,11 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed top-14 left-0 hidden h-[calc(100vh-3.5rem)] w-[220px] overflow-y-auto border-r border-(--nova-border-default) bg-(--nova-bg-primary) px-4 py-6 lg:block">
+    <aside className="fixed top-14 left-0 hidden h-[calc(100vh-3.5rem)] w-[240px] overflow-y-auto border-r border-(--nova-border-default) bg-(--nova-bg-primary) px-4 py-6 lg:block">
       <nav className="space-y-6">
         {navigation.map((section) => (
           <div key={section.title}>
-            <h4 className="mb-1.5 px-2 text-sm font-semibold text-(--nova-text-primary)">
+            <h4 className="mb-2 px-3 text-xs font-semibold uppercase tracking-widest text-(--nova-text-tertiary)">
               {section.title}
             </h4>
             <ul className="space-y-0.5">
@@ -56,12 +56,15 @@ export function Sidebar() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`block rounded-md px-2 py-1.5 text-sm transition-colors ${
+                      className={`relative flex items-center rounded-md px-3 py-1.5 text-[13px] transition-all ${
                         isActive
-                          ? 'bg-(--nova-bg-secondary) font-medium text-(--nova-text-primary)'
-                          : 'text-(--nova-text-tertiary) hover:text-(--nova-text-primary) hover:bg-(--nova-bg-secondary)'
+                          ? 'bg-(--nova-bg-secondary) font-semibold text-(--nova-text-primary) shadow-sm'
+                          : 'text-(--nova-text-tertiary) hover:text-(--nova-text-primary) hover:bg-(--nova-bg-secondary)/50'
                       }`}
                     >
+                      {isActive && (
+                        <span className="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-(--nova-color-primary)" />
+                      )}
                       {item.label}
                     </Link>
                   </li>

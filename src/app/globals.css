@@ -13,41 +13,93 @@
 @theme inline {
   --color-docs-sidebar: var(--nova-bg-secondary);
   --color-docs-border: var(--nova-border-default);
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
 }
 
-/* Premium docs site styles */
-
-/* Scrollbar */
+/* === Premium Scrollbar === */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--nova-border-default);
   border-radius: 999px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--nova-border-strong);
 }
 
-/* Code blocks */
-code {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
-}
-
-/* Smooth scrolling */
+/* === Base === */
 html {
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Selection */
 ::selection {
-  background-color: var(--nova-color-primary);
+  background-color: oklch(0.55 0.22 264);
   color: white;
+}
+
+/* === Code styling === */
+code {
+  font-family: var(--font-mono);
+  font-feature-settings: 'liga' 1, 'calt' 1;
+}
+
+pre code {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* === Premium component preview background pattern === */
+.nova-docs-preview-bg {
+  background-color: var(--nova-bg-primary);
+  background-image:
+    radial-gradient(circle, var(--nova-border-default) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* === Smooth page transitions === */
+main {
+  animation: nova-docs-fadein 0.2s ease-out;
+}
+
+@keyframes nova-docs-fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* === Gradient text utility === */
+.nova-gradient-text {
+  background: linear-gradient(135deg, oklch(0.55 0.22 264), oklch(0.65 0.22 290));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* === Hero mesh gradient === */
+.nova-hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.55 0.22 264 / 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, oklch(0.65 0.22 290 / 0.08), transparent);
+}
+
+[data-theme="dark"] .nova-hero-gradient {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, oklch(0.55 0.22 264 / 0.2), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 50%, oklch(0.65 0.22 290 / 0.12), transparent);
+}
+
+/* === Prose-like inline code === */
+:not(pre) > code {
+  padding: 0.15em 0.4em;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  background: var(--nova-bg-tertiary);
+  border: 1px solid var(--nova-border-default);
 }

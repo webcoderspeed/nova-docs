@@ -75,7 +75,7 @@ export function ComponentPreview({
 
       {activeTab === 'preview' ? (
         <div
-          className={`flex min-h-[120px] items-center justify-center bg-(--nova-bg-primary) p-8 ${className}`}
+          className={`nova-docs-preview-bg flex min-h-[150px] items-center justify-center p-10 ${className}`}
         >
           <div className="w-full">{children}</div>
         </div>

@@ -28,30 +28,30 @@ export function CodeBlock({
   const lines = code.split('\n');
 
   return (
-    <div className="group relative rounded-lg border border-(--nova-border-default) bg-(--nova-bg-secondary) overflow-hidden">
+    <div className="group relative rounded-xl border border-(--nova-border-default) bg-(--nova-bg-secondary) overflow-hidden shadow-sm">
       {filename && (
-        <div className="flex items-center gap-2 border-b border-(--nova-border-default) px-4 py-2 text-xs text-(--nova-text-tertiary)">
+        <div className="flex items-center gap-2 border-b border-(--nova-border-default) px-4 py-2.5 text-xs">
           {language === 'bash' ? (
-            <Terminal className="h-3.5 w-3.5" />
+            <Terminal className="h-3.5 w-3.5 text-(--nova-text-tertiary)" />
           ) : (
-            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg className="h-3.5 w-3.5 text-(--nova-text-tertiary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z" />
               <polyline points="13 2 13 9 20 9" />
             </svg>
           )}
-          <span className="font-medium">{filename}</span>
+          <span className="font-medium text-(--nova-text-secondary)">{filename}</span>
         </div>
       )}
       <div className="relative">
         <pre
           ref={preRef}
-          className="overflow-x-auto p-4 text-[13px] leading-relaxed"
+          className="overflow-x-auto px-4 py-4 text-[13px] leading-[1.7]"
         >
           <code className="text-(--nova-text-primary) font-mono">
             {showLineNumbers
               ? lines.map((line, i) => (
                   <span key={i} className="table-row">
-                    <span className="table-cell select-none pr-4 text-right text-(--nova-text-tertiary) opacity-50 text-xs">
+                    <span className="table-cell select-none pr-4 text-right text-(--nova-text-tertiary) opacity-40 text-xs w-8">
                       {i + 1}
                     </span>
                     <span className="table-cell">{line}{'\n'}</span>
@@ -62,11 +62,11 @@ export function CodeBlock({
         </pre>
         <button
           onClick={handleCopy}
-          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-md border border-(--nova-border-default) bg-(--nova-bg-primary) text-(--nova-text-tertiary) opacity-0 transition-all hover:text-(--nova-text-primary) hover:bg-(--nova-bg-secondary) group-hover:opacity-100"
+          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-lg border border-(--nova-border-default) bg-(--nova-bg-primary) text-(--nova-text-tertiary) opacity-0 shadow-sm transition-all hover:text-(--nova-text-primary) hover:bg-(--nova-bg-secondary) group-hover:opacity-100"
           aria-label="Copy code"
         >
           {copied ? (
-            <Check className="h-3.5 w-3.5 text-green-500" />
+            <Check className="h-3.5 w-3.5 text-emerald-500" />
           ) : (
             <Copy className="h-3.5 w-3.5" />
           )}
