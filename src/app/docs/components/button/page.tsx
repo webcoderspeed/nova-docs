@@ -8,7 +8,7 @@ import { OnThisPage } from '@/components/OnThisPage';
 
 const headings = [
   { id: 'variants', text: 'Variants', level: 2 },
-  { id: 'outline', text: 'Outline', level: 2 },
+  { id: 'dashed', text: 'Dashed', level: 2 },
   { id: 'ghost', text: 'Ghost', level: 2 },
   { id: 'link', text: 'Link', level: 2 },
   { id: 'danger', text: 'Danger', level: 2 },
@@ -18,6 +18,9 @@ const headings = [
   { id: 'shape', text: 'Shape', level: 2 },
   { id: 'block', text: 'Block / Full Width', level: 2 },
   { id: 'loading', text: 'Loading', level: 2 },
+  { id: 'loading-custom', text: 'Loading — Custom Icon', level: 2 },
+  { id: 'loading-delay', text: 'Loading — Delay', level: 2 },
+  { id: 'html-type', text: 'HTML Type', level: 2 },
   { id: 'disabled', text: 'Disabled', level: 2 },
   { id: 'polymorphic', text: 'Polymorphic (as prop)', level: 2 },
   { id: 'api-reference', text: 'API Reference', level: 2 },
@@ -72,6 +75,22 @@ function TrashIcon() {
   );
 }
 
+function StarIcon() {
+  return (
+    <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+    </svg>
+  );
+}
+
+function Code({ children }: { children: string }) {
+  return (
+    <code className="rounded bg-(--nova-bg-tertiary) px-1.5 py-0.5 text-xs font-mono text-(--nova-color-primary)">
+      {children}
+    </code>
+  );
+}
+
 export default function ButtonPage() {
   return (
     <div className="flex gap-10">
@@ -84,24 +103,27 @@ export default function ButtonPage() {
           ]}
         />
 
-        <h1 className="text-3xl font-bold tracking-tight text-(--nova-text-primary)">
-          Button
-        </h1>
+        <h1 className="text-3xl font-bold tracking-tight text-(--nova-text-primary)">Button</h1>
         <p className="mt-2 text-lg text-(--nova-text-secondary) leading-relaxed">
-          Displays a button or a component that looks like a button. Supports 7 variants, 5 sizes,
-          icon-only, shapes, block mode, loading state, and polymorphic rendering.
+          Triggers an operation. Supports 8 variants, 5 sizes, shapes, icon placement, block mode,
+          loading state (with delay and custom icon), and polymorphic rendering.
         </p>
 
         <div className="mt-8 space-y-10">
+
           {/* All Variants */}
           <section>
             <h2 id="variants" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
               Variants
             </h2>
+            <p className="mb-3 text-sm text-(--nova-text-secondary)">
+              Eight visual styles covering the full spectrum from primary actions to destructive ones.
+            </p>
             <ComponentPreview
               code={`<NovaButton variant="primary">Primary</NovaButton>
 <NovaButton variant="secondary">Secondary</NovaButton>
 <NovaButton variant="outline">Outline</NovaButton>
+<NovaButton variant="dashed">Dashed</NovaButton>
 <NovaButton variant="ghost">Ghost</NovaButton>
 <NovaButton variant="link">Link</NovaButton>
 <NovaButton variant="danger">Danger</NovaButton>
@@ -111,6 +133,7 @@ export default function ButtonPage() {
                 <NovaButton variant="primary">Primary</NovaButton>
                 <NovaButton variant="secondary">Secondary</NovaButton>
                 <NovaButton variant="outline">Outline</NovaButton>
+                <NovaButton variant="dashed">Dashed</NovaButton>
                 <NovaButton variant="ghost">Ghost</NovaButton>
                 <NovaButton variant="link">Link</NovaButton>
                 <NovaButton variant="danger">Danger</NovaButton>
@@ -119,15 +142,22 @@ export default function ButtonPage() {
             </ComponentPreview>
           </section>
 
-          {/* Outline */}
+          {/* Dashed */}
           <section>
-            <h2 id="outline" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
-              Outline
+            <h2 id="dashed" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
+              Dashed
             </h2>
+            <p className="mb-3 text-sm text-(--nova-text-secondary)">
+              Commonly used for adding more actions or placeholder-style triggers.
+            </p>
             <ComponentPreview
-              code={`<NovaButton variant="outline">Outline</NovaButton>`}
+              code={`<NovaButton variant="dashed">Add Item</NovaButton>
+<NovaButton variant="dashed" leftIcon={<PlusIcon />}>New Section</NovaButton>`}
             >
-              <NovaButton variant="outline">Outline</NovaButton>
+              <div className="flex items-center gap-3">
+                <NovaButton variant="dashed">Add Item</NovaButton>
+                <NovaButton variant="dashed" leftIcon={<PlusIcon />}>New Section</NovaButton>
+              </div>
             </ComponentPreview>
           </section>
 
@@ -136,9 +166,7 @@ export default function ButtonPage() {
             <h2 id="ghost" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
               Ghost
             </h2>
-            <ComponentPreview
-              code={`<NovaButton variant="ghost">Ghost</NovaButton>`}
-            >
+            <ComponentPreview code={`<NovaButton variant="ghost">Ghost</NovaButton>`}>
               <NovaButton variant="ghost">Ghost</NovaButton>
             </ComponentPreview>
           </section>
@@ -148,9 +176,7 @@ export default function ButtonPage() {
             <h2 id="link" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
               Link
             </h2>
-            <ComponentPreview
-              code={`<NovaButton variant="link">Link Button</NovaButton>`}
-            >
+            <ComponentPreview code={`<NovaButton variant="link">Link Button</NovaButton>`}>
               <NovaButton variant="link">Link Button</NovaButton>
             </ComponentPreview>
           </section>
@@ -183,7 +209,7 @@ export default function ButtonPage() {
 <NovaButton size="lg">Large</NovaButton>
 <NovaButton size="icon"><PlusIcon /></NovaButton>`}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <NovaButton size="xs">Extra Small</NovaButton>
                 <NovaButton size="sm">Small</NovaButton>
                 <NovaButton size="md">Medium</NovaButton>
@@ -198,18 +224,13 @@ export default function ButtonPage() {
             <h2 id="with-icon" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
               With Icon
             </h2>
+            <p className="mb-3 text-sm text-(--nova-text-secondary)">
+              Use <Code>leftIcon</Code> or <Code>rightIcon</Code> to place icons before or after the label.
+            </p>
             <ComponentPreview
-              code={`<NovaButton leftIcon={<MailIcon />}>
-  Login with Email
-</NovaButton>
-
-<NovaButton variant="secondary" rightIcon={<ChevronRightIcon />}>
-  Next Step
-</NovaButton>
-
-<NovaButton variant="outline" leftIcon={<DownloadIcon />}>
-  Download
-</NovaButton>`}
+              code={`<NovaButton leftIcon={<MailIcon />}>Login with Email</NovaButton>
+<NovaButton variant="secondary" rightIcon={<ChevronRightIcon />}>Next Step</NovaButton>
+<NovaButton variant="outline" leftIcon={<DownloadIcon />}>Download</NovaButton>`}
             >
               <div className="flex items-center gap-3 flex-wrap">
                 <NovaButton leftIcon={<MailIcon />}>Login with Email</NovaButton>
@@ -225,8 +246,7 @@ export default function ButtonPage() {
               Icon Only
             </h2>
             <p className="mb-3 text-sm text-(--nova-text-secondary)">
-              Use <code className="rounded bg-(--nova-bg-tertiary) px-1.5 py-0.5 text-xs font-mono text-(--nova-color-primary)">iconOnly</code> or <code className="rounded bg-(--nova-bg-tertiary) px-1.5 py-0.5 text-xs font-mono text-(--nova-color-primary)">size=&quot;icon&quot;</code> for
-              square icon buttons.
+              Use <Code>iconOnly</Code> or <Code>{'size="icon"'}</Code> for square icon buttons.
             </p>
             <ComponentPreview
               code={`<NovaButton iconOnly variant="primary"><PlusIcon /></NovaButton>
@@ -271,12 +291,12 @@ export default function ButtonPage() {
             <ComponentPreview
               code={`<NovaButton block>Full Width Primary</NovaButton>
 <NovaButton block variant="secondary">Full Width Secondary</NovaButton>
-<NovaButton block variant="danger">Full Width Danger</NovaButton>`}
+<NovaButton block variant="dashed">Full Width Dashed</NovaButton>`}
             >
               <div className="flex flex-col gap-3 w-full max-w-md">
                 <NovaButton block>Full Width Primary</NovaButton>
                 <NovaButton block variant="secondary">Full Width Secondary</NovaButton>
-                <NovaButton block variant="danger">Full Width Danger</NovaButton>
+                <NovaButton block variant="dashed">Full Width Dashed</NovaButton>
               </div>
             </ComponentPreview>
           </section>
@@ -287,19 +307,84 @@ export default function ButtonPage() {
               Loading
             </h2>
             <p className="mb-3 text-sm text-(--nova-text-secondary)">
-              The <code className="rounded bg-(--nova-bg-tertiary) px-1.5 py-0.5 text-xs font-mono text-(--nova-color-primary)">loading</code> prop
-              replaces the left icon with a spinner and disables the button. Sets <code className="rounded bg-(--nova-bg-tertiary) px-1.5 py-0.5 text-xs font-mono">aria-busy</code>.
+              Pass <Code>loading</Code> to show a spinner, disable the button, and set{' '}
+              <Code>aria-busy</Code>. Replaces the left icon while active.
             </p>
             <ComponentPreview
               code={`<NovaButton loading>Loading</NovaButton>
 <NovaButton loading variant="secondary">Please wait</NovaButton>
-<NovaButton loading variant="outline">Saving...</NovaButton>`}
+<NovaButton loading variant="outline">Saving...</NovaButton>
+<NovaButton loading variant="dashed">Processing</NovaButton>`}
             >
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 flex-wrap">
                 <NovaButton loading>Loading</NovaButton>
                 <NovaButton loading variant="secondary">Please wait</NovaButton>
                 <NovaButton loading variant="outline">Saving...</NovaButton>
+                <NovaButton loading variant="dashed">Processing</NovaButton>
               </div>
+            </ComponentPreview>
+          </section>
+
+          {/* Loading — Custom Icon */}
+          <section>
+            <h2 id="loading-custom" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
+              Loading — Custom Icon
+            </h2>
+            <p className="mb-3 text-sm text-(--nova-text-secondary)">
+              Pass <Code>{'loading={{ icon: <Node /> }}'}</Code> to replace the default spinner with any icon.
+            </p>
+            <ComponentPreview
+              code={`<NovaButton loading={{ icon: <StarIcon /> }}>
+  Saving
+</NovaButton>`}
+            >
+              <div className="flex items-center gap-3">
+                <NovaButton loading={{ icon: <StarIcon /> }}>Saving</NovaButton>
+              </div>
+            </ComponentPreview>
+          </section>
+
+          {/* Loading — Delay */}
+          <section>
+            <h2 id="loading-delay" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
+              Loading — Delay
+            </h2>
+            <p className="mb-3 text-sm text-(--nova-text-secondary)">
+              Pass <Code>{'loading={{ delay: 800 }}'}</Code> to defer the spinner by a number of
+              milliseconds. The button stays interactive until the delay elapses — useful to avoid
+              flashing for fast operations.
+            </p>
+            <ComponentPreview
+              code={`// Spinner appears after 800 ms
+<NovaButton loading={{ delay: 800 }}>Submit</NovaButton>`}
+            >
+              <div className="flex items-center gap-3">
+                <NovaButton loading={{ delay: 800 }}>Submit (delayed 800ms)</NovaButton>
+              </div>
+            </ComponentPreview>
+          </section>
+
+          {/* HTML Type */}
+          <section>
+            <h2 id="html-type" className="scroll-mt-20 text-xl font-semibold text-(--nova-text-primary) mb-4">
+              HTML Type
+            </h2>
+            <p className="mb-3 text-sm text-(--nova-text-secondary)">
+              Use <Code>htmlType</Code> to set the native <Code>type</Code> attribute (
+              <Code>button</Code>, <Code>submit</Code>, <Code>reset</Code>). Defaults to{' '}
+              <Code>button</Code> to prevent accidental form submissions. Automatically omitted when
+              rendered as a non-button element.
+            </p>
+            <ComponentPreview
+              code={`<form>
+  <NovaButton htmlType="submit">Submit Form</NovaButton>
+  <NovaButton htmlType="reset" variant="secondary">Reset</NovaButton>
+</form>`}
+            >
+              <form onSubmit={(e) => e.preventDefault()} className="flex items-center gap-3">
+                <NovaButton htmlType="submit">Submit Form</NovaButton>
+                <NovaButton htmlType="reset" variant="secondary">Reset</NovaButton>
+              </form>
             </ComponentPreview>
           </section>
 
@@ -312,12 +397,14 @@ export default function ButtonPage() {
               code={`<NovaButton disabled>Primary</NovaButton>
 <NovaButton disabled variant="secondary">Secondary</NovaButton>
 <NovaButton disabled variant="outline">Outline</NovaButton>
+<NovaButton disabled variant="dashed">Dashed</NovaButton>
 <NovaButton disabled variant="danger">Danger</NovaButton>`}
             >
               <div className="flex items-center gap-3 flex-wrap">
                 <NovaButton disabled>Primary</NovaButton>
                 <NovaButton disabled variant="secondary">Secondary</NovaButton>
                 <NovaButton disabled variant="outline">Outline</NovaButton>
+                <NovaButton disabled variant="dashed">Dashed</NovaButton>
                 <NovaButton disabled variant="danger">Danger</NovaButton>
               </div>
             </ComponentPreview>
@@ -329,12 +416,12 @@ export default function ButtonPage() {
               Polymorphic (as prop)
             </h2>
             <p className="mb-3 text-sm text-(--nova-text-secondary)">
-              Render the button as any HTML element or React component using the <code className="rounded bg-(--nova-bg-tertiary) px-1.5 py-0.5 text-xs font-mono text-(--nova-color-primary)">as</code> prop.
-              All props from the target element are forwarded.
+              Render as any HTML element or React component using the <Code>as</Code> prop. All
+              props from the target element are forwarded and fully typed.
             </p>
             <ComponentPreview
-              code={`<NovaButton as="a" href="/link" variant="secondary">
-  Renders as <a>
+              code={`<NovaButton as="a" href="#" variant="secondary">
+  Renders as {'<a>'}
 </NovaButton>`}
             >
               <div className="flex items-center gap-3">
@@ -354,7 +441,7 @@ export default function ButtonPage() {
               data={[
                 {
                   name: 'variant',
-                  type: "'primary' | 'secondary' | 'outline' | 'ghost' | 'link' | 'danger' | 'danger-outline'",
+                  type: "'primary' | 'secondary' | 'outline' | 'dashed' | 'ghost' | 'link' | 'danger' | 'danger-outline'",
                   default: "'primary'",
                   description: 'Visual style of the button',
                 },
@@ -371,10 +458,16 @@ export default function ButtonPage() {
                   description: 'Border radius style',
                 },
                 {
+                  name: 'htmlType',
+                  type: "'button' | 'submit' | 'reset'",
+                  default: "'button'",
+                  description: 'Native type attribute. Omitted when rendered as a non-button element.',
+                },
+                {
                   name: 'loading',
-                  type: 'boolean',
+                  type: "boolean | { delay?: number; icon?: ReactNode }",
                   default: 'false',
-                  description: 'Show spinner, disable clicks, set aria-busy',
+                  description: 'Show spinner and disable. Object form supports delayed activation and a custom loading icon.',
                 },
                 {
                   name: 'disabled',
@@ -395,20 +488,20 @@ export default function ButtonPage() {
                   description: 'Square icon button (forces size="icon")',
                 },
                 {
-                  name: 'as',
-                  type: 'ElementType',
-                  default: "'button'",
-                  description: 'Render as a different element (e.g. "a", Link)',
-                },
-                {
                   name: 'leftIcon',
                   type: 'ReactNode',
-                  description: 'Icon rendered before children',
+                  description: 'Icon rendered before children. Hidden while loading.',
                 },
                 {
                   name: 'rightIcon',
                   type: 'ReactNode',
-                  description: 'Icon rendered after children',
+                  description: 'Icon rendered after children. Hidden while loading.',
+                },
+                {
+                  name: 'as',
+                  type: 'ElementType',
+                  default: "'button'",
+                  description: 'Render as a different element or component (e.g. "a", Link)',
                 },
                 {
                   name: 'novaTestId',
